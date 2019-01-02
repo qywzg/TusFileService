@@ -1,0 +1,13 @@
+127.0.0.1       localhost
+::1     localhost ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+172.18.0.4      65478267e8fc
+192.168.120.11 task
+192.168.120.11 convert
+192.168.120.11 algorithm
+192.168.120.11 storge_resource
+192.168.120.11 storge_tus
+192.168.40.170 backend

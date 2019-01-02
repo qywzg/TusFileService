@@ -1,0 +1,54 @@
+version: '2'
+
+services:
+  proxy:
+    restart: always
+    build: Nginx
+    image: center:5000/proxy:test
+    ports:
+      - "80:80"
+    volumes:
+      - "./Nginx/log/:/var/log/nginx/"
+#      - "./Nginx/hosts:/etc/hosts"
+    links:
+      - storge_tus
+
+
+  storge_resource:
+    restart: always
+    build: Storge/Resource
+    image: center:5000/storge_resource:v1.2
+    expose:
+      - "8880"
+    ports:
+      - "8880:8880"
+    volumes:
+      - "./storge/storge:/storge/"
+    command: python3 Resource.py
+
+  storge_multipart:
+    restart: always
+    build: Storge/multipart_uploader
+    image: center:5000/storge_multipart_uploader:latest
+    expose:
+      - "8881"
+    ports:
+      - "8881:8881"
+    volumes:
+      - "./storge/storge:/storge/"
+    command: python3 MultipartUploader.py
+
+  storge_tus:
+    restart: always
+    build: Storge/tus_uploader/
+    image: center:5000/storge_tus_uploader:v1.2
+    expose:
+      - "8882"
+    ports:
+      - "8882:8882"
+    volumes:
+      - "/tmp/:/tmp/"
+      - "./storge/storge:/storge/"
+    command: ./go -behind-proxy
+    # command: tail -f /etc/hosts
+

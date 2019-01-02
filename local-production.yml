@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+    proxy:
+      build: Proxy
+      image: center:5000/proxy:loalproduction  
+    storge_resource:
+      build: Storge/Resource
+      image: center:5000/storge_resource:loalproduction
+      
+
+    storge_multipart:
+      build: Storge/multipart_uploader
+      image: center:5000/storge_multipart_uploader:loalproduction
+      
+    storge_tus:
+      build: Storge/tus_uploader/
+      image: center:5000/storge_tus_uploader:loalproduction

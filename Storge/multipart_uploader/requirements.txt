@@ -1,0 +1,4 @@
+sanic == 0.7.0
+requests
+aiofiles
+python-multipart
